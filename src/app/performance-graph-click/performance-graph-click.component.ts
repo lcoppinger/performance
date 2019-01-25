@@ -34,7 +34,7 @@ export class PerformanceGraphClickComponent {
   }
 
   makeTable() {
-    this.http.get("../assets/json/click-"+this.strategy.name.toLowerCase()+".json").subscribe((data: any) => {
+    this.http.get("assets/json/click-"+this.strategy.name.toLowerCase()+".json").subscribe((data: any) => {
       this.tableData = data.filter((value, index, Arr) => {
         return index % 3 == 0;
       });
@@ -161,7 +161,7 @@ export class PerformanceGraphClickComponent {
         .attr('class', 'stop-right')
         .attr('offset', '100%');
 
-    d3.json("../assets/json/click-"+this.strategy.name.toLowerCase()+".json", function(error, data) {
+    d3.json("assets/json/click-"+this.strategy.name.toLowerCase()+".json", function(error, data) {
       if (error) throw error;
 
       calculateData(data);
@@ -321,7 +321,7 @@ export class PerformanceGraphClickComponent {
     });
 
     function refresh() {
-      d3.json("../assets/json/click-"+self.strategy.name.toLowerCase()+".json", function(error, data) {
+      d3.json("assets/json/click-"+self.strategy.name.toLowerCase()+".json", function(error, data) {
         calculateData(data);
         const every_nth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
 

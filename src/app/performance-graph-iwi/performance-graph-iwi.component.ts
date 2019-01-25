@@ -34,7 +34,7 @@ export class PerformanceGraphIwiComponent {
   }
 
   makeTable() {
-    this.http.get("../assets/json/iwi-"+this.strategy.name.toLowerCase()+".json").subscribe((data: any) => {
+    this.http.get("assets/json/iwi-"+this.strategy.name.toLowerCase()+".json").subscribe((data: any) => {
       this.tableData = data.filter((value, index, Arr) => {
         return index % 3 == 0;
       });
@@ -161,7 +161,7 @@ export class PerformanceGraphIwiComponent {
         .attr('class', 'stop-right')
         .attr('offset', '100%');
 
-    d3.json("../assets/json/iwi-"+this.strategy.name.toLowerCase()+".json", function(error, data) {
+    d3.json("assets/json/iwi-"+this.strategy.name.toLowerCase()+".json", function(error, data) {
       if (error) throw error;
 
       calculateData(data);
@@ -312,7 +312,7 @@ export class PerformanceGraphIwiComponent {
     });
 
     function refresh() {
-      d3.json("../assets/json/iwi-"+self.strategy.name.toLowerCase()+".json", function(error, data) {
+      d3.json("assets/json/iwi-"+self.strategy.name.toLowerCase()+".json", function(error, data) {
         calculateData(data);
         const every_nth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
 
