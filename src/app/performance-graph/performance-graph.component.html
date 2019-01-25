@@ -1,0 +1,14 @@
+<div class="performance-wrapper">
+  <div class="tabs">
+    <button type="button" class="tab" [ngClass]="strategy.name" [class.active]="active==strategy.name" *ngFor="let strategy of strategies"
+    (click)="changeStrategy(strategy)">
+      <div class="tab-content">
+      <img [src]="getImage(strategy)" />
+      <span class="name" [class.active]="active==strategy.name">{{ strategy.name }}</span>
+      </div>
+      <span class="risk" [class.active]="active==strategy.name">{{ strategy.risk }}</span>
+    </button>
+  </div>
+  <app-performance-graph-click *ngIf="data === 'Click'" (switch)="switchData()" [strategy]="strategy"></app-performance-graph-click>
+  <app-performance-graph-iwi *ngIf="data !== 'Click'" (switch)="switchData()" [strategy]="strategy"></app-performance-graph-iwi>
+</div>

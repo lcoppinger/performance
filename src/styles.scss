@@ -1,1 +1,244 @@
-/* You can add global styles to this file, and also import other style files */
+/* Fonts */
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('/assets/fonts/OpenSans-Regular.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'OpenSans-Light';
+    src: url('/assets/fonts/OpenSans-Light.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'OpenSans-SemiBold';
+    src: url('/assets/fonts/OpenSans-SemiBold.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('/assets/fonts/OpenSans-Bold.ttf') format("truetype");
+}
+
+//Media queries breakpoints
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+$screen-xlg: 1600px;
+
+/* Color palette*/
+$white: #ffffff;
+$grey-01: #424242;
+$grey-02: #637688;
+$grey-03: #5C686F;
+$grey-04: #cccccc;
+$grey-05: #F6F7F8;
+$primary-01: #E87722;
+$primary-02: #E84522;
+$secondary: #00355D;
+
+/* Background */
+$background-01: $white;
+$background-02: $grey-05;
+
+%title {
+    font-family: 'OpenSans-SemiBold';
+    font-weight: 600;
+    color: $grey-01;
+    font-size: 28px;
+
+    @media (min-width: $screen-md) {
+        font-size: 36px;
+    }
+
+    @media (min-width: $screen-lg) {
+        font-size: 48px;
+    }
+}
+
+%subtitle {
+    font-family: 'OpenSans-Regular';
+    font-weight: 400;
+    color: $secondary;
+    font-size: 26px;
+    margin: 0 0 20px 0;
+    text-align: center;
+
+    @media (min-width: $screen-md) {
+        font-size: 36px;
+    }
+}
+
+%h3-title {
+    font-family: 'OpenSans-SemiBold';
+    font-weight: 600;
+    color: $grey-02;
+    font-size: 20px;
+
+    @media (min-width: $screen-md) {
+        font-size: 26px;
+    }
+}
+
+%h4-title {
+    font-family: 'OpenSans-SemiBold';
+    font-weight: 600;
+    color: $grey-02;
+    font-size: 20px;
+
+    @media (min-width: $screen-md) {
+        font-size: 24px;
+    }
+}
+
+%label {
+    font-family: 'OpenSans-SemiBold';
+    font-weight: 600;
+    color: $grey-03;
+    font-size: 18px;
+
+    @media (min-width: $screen-md) {
+        font-size: 20px;
+    }
+}
+
+%body-copy {
+    font-family: 'OpenSans-Regular';
+    color: $grey-01;
+    font-size: 16px;
+
+    @media (min-width: $screen-md) {
+        font-size: 18px;
+    }
+}
+
+body {
+    margin: 0;
+}
+
+.white-curve {
+    background: url("/assets/imgs/white-curve-mobile.svg") no-repeat center;
+    background-size: cover;
+    height: 40px;
+    width: 100%;
+    margin-top: -40px;
+    margin-bottom: -1px;
+
+    @media (min-width: $screen-sm) {
+        background: url("/assets/imgs/white-curve.svg") no-repeat center;
+        background-size: cover;
+        height: 80px;
+        margin-top: -40px;
+    }
+
+    @media (min-width: $screen-md) {
+        height: 80px;
+        margin-top: -30px;
+    }
+
+    @media (min-width: $screen-lg) {
+        height: 150px;
+        margin-top: -80px;
+    }
+}
+
+.grey-curve {
+    background: url("/assets/imgs/grey-curve-mobile.svg") no-repeat center;
+    background-size: cover;
+    height: 40px;
+    width: 100%;
+    margin-top: -40px;
+    margin-bottom: -1px;
+
+    @media (min-width: $screen-sm) {
+        background: url("/assets/imgs/grey-curve.svg") no-repeat center;
+        background-size: cover;
+        height: 80px;
+        margin-top: -40px;
+    }
+
+    @media (min-width: $screen-md) {
+        height: 80px;
+        margin-top: -30px;
+    }
+
+    @media (min-width: $screen-lg) {
+        height: 150px;
+        margin-top: -80px;
+    }
+}
+
+.link {
+    font-family: 'OpenSans-SemiBold';
+    font-weight: 600;
+    color: $primary-01;
+    font-size: 18px;
+    text-decoration: none;
+    transition: background-color 0.2s linear;
+
+    @media (min-width: $screen-md) {
+        font-size: 20px;
+    }
+
+    &:after {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 14px;
+        background: url('/assets/imgs/link-chevron.svg') no-repeat center;
+        background-size: contain;
+        margin-left: 6px;
+    }
+
+    &:hover,
+    :focus,
+    :active {
+        color: darken( $primary-01, 10% );
+    }
+}
+
+.button-primary {
+    font-family: 'OpenSans-Bold';
+    font-weight: 700;
+    font-size: 18px;
+    color: $white;
+    background-color: $primary-02;
+    padding: 14px;
+    min-width: 100%;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+
+    &:hover,
+    :focus,
+    :active {
+        background-color: darken( $primary-02, 10% );
+    }
+
+    @media (min-width: $screen-sm) {
+        min-width: 280px;
+    }
+}
+
+.button-secondary {
+    font-family: 'OpenSans-Bold';
+    font-weight: 700;
+    font-size: 18px;
+    color: $white;
+    background-color: $grey-02;
+    padding: 14px 30px;
+    min-width: 280px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+
+    &:hover,
+    :focus,
+    :active {
+        background-color: darken( $grey-02, 10% );
+    }
+
+    @media (min-width: $screen-sm) {
+        min-width: 150px;
+    }
+}

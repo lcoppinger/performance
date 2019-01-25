@@ -1,0 +1,147 @@
+@import "./src/styles";
+
+.click {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #FEA867;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.arc {
+    width: 16px;
+    border-bottom: 3px dashed #9FA7AB;
+    margin-right: 8px;
+}
+
+//graph
+/deep/.axis {
+    font-size: 12px;
+    font-family: 'OpenSans-SemiBold';
+    font-weight: 600;
+
+    @media (min-width: $screen-md) {
+        font-size: 14px;
+    }
+}
+
+/deep/.axis--x {
+    font-size: 10px;
+
+    @media (min-width: $screen-md) {
+        font-size: 14px;
+    } 
+}
+
+/deep/.axis text {
+    fill: #808B91;
+}
+
+/deep/.axis path,
+/deep/.axis line {
+    fill: none;
+    stroke: #DDE2E5;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
+
+/deep/.grid line {
+    stroke: #DDE2E5;
+    stroke-opacity: 1;
+    shape-rendering: crispEdges;
+  }
+  
+/deep/.grid path {
+    stroke-width: 0;
+}
+
+/deep/#Click .line {
+    fill: none;
+    stroke: #FEA867;
+    stroke-width: 3px;
+}
+
+/deep/#Click .circle {
+    fill: #ffffff;
+    stroke: #FEA867;
+    stroke-width: 3px;
+}
+
+/deep/.lineArc {
+    fill: none;
+    stroke: #9FA7AB;
+    stroke-width: 3px;
+}
+
+/deep/.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+/deep/#Click .focus circle {
+    fill: #ffffff;
+    stroke: #E87722;
+    stroke-width: 6px;
+}
+
+/deep/.hover-line {
+    stroke: #5C686F;
+    stroke-width: 1px;
+}
+
+/deep/.tooltip-inner {
+    background-color: #F6F7F8;
+    padding: 10px 14px;
+    border-radius: 4px;
+    border: 1px solid #DDE2E5;
+    display: inline-block;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.16);
+}
+
+/deep/.tooltip-inner span {
+    font-size: 12px;
+    font-family: 'OpenSans-SemiBold';
+    font-weight: 600;
+    color: #5C686F;
+
+    @media (min-width: $screen-sm) {
+        font-size: 16px;
+    }
+}
+
+/deep/#Click .stop-left {
+    stop-color: #E87722;
+    stop-opacity: 0.5;
+}
+
+/deep/.stop-right {
+    stop-color: #ffffff;
+    stop-opacity: 0;
+}
+
+/deep/#Click .area {
+    fill: url(#mainGradientClick);
+}
+
+/deep/.zoom {
+    cursor: move;
+    fill: none;
+    pointer-events: all;
+}
+
+.risk {
+    font-family: 'OpenSans-Regular';
+    font-weight: 400;
+    color: #40484E;
+    margin: 20px 0;
+
+    @media (min-width: $screen-md) {
+        margin: 20px 40px;
+    }
+
+    @media (min-width: $screen-lg) {
+        margin: 20px 0 20px 10px;
+    }
+}
+

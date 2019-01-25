@@ -1,0 +1,59 @@
+<h3 class="performance-title">Since inception for a <span>{{strategy.risk|lowercase}}</span> portfolio:</h3>
+<div class="calculator-wrapper">
+  <div class="section">
+    <div class="form-group input-group">
+      <label>Enter initial amount:</label>
+      <span class="currency">£</span>
+      <input type="text" [(ngModel)]="intialInvestment" name="currency-field" id="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="10,000" data-type="currency">
+    </div>
+  </div>
+  <div class="section">
+    <div class="form-group result-group">
+      <label>Portfolio growth</label>
+      <span class="number">£ {{ valueIncrease }}</span>
+    </div>
+  </div>
+  <div class="section">
+    <div class="form-group result-group">
+      <label>Portfolio percentage increase</label>
+      <span class="number">{{ percentageIncrease }}%</span>
+    </div>
+  </div>
+</div>
+<div class="graph-wrapper">
+  <div class="key">
+    <div class="item">
+      <span class="click"></span>Click & Invest
+    </div>
+    <div class="item">
+      <span class="arc"></span>Competitor
+    </div>
+  </div>
+  <div id="chart"></div>
+  <p class="risk">Returns are calculated after Click & Invest management fees. Figures refer to past performance and are not a reliable indicator for future performance.</p>
+</div>
+<div class="table-wrapper">
+  <div class="toggle" (click)="toggleTable()">
+    <h3>Show quarterly percentage breakdown</h3>
+    <img src="assets/imgs/chevron-down.svg" [ngClass]="{'rotate': expanded}" />
+  </div>
+  <table *ngIf="tableData" class="tableData" [ngClass]="{'active': expanded}">
+    <tr>
+      <th></th>
+      <th>Click & Invest</th>
+      <th>Competitor</th>
+    </tr>
+    <tr *ngFor="let data of tableData">
+      <td class="date">{{data.date}}</td>
+      <td class="clickData">{{data.click}}%</td>
+      <td class="arcData">{{data.arc}}%</td>
+    </tr>
+  </table>
+</div>
+<div class="information">
+  <span>Investec Wealth & Investment (IW&I) matched portfolios</span>
+  <p>Portfolio performance prior to 2016 can be demonstrated using matched portfolios from Investec Wealth and Investment. You can find out more about the relationship between Click & Invest and IW&I on our <a href="#">About us</a> page.</p>
+  <a id="dataSwitch" class="link" (click)="switchData()">View Investec Wealth and Investment performance</a>
+</div>
+
+  
