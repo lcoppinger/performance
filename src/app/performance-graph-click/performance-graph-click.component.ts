@@ -63,7 +63,7 @@ export class PerformanceGraphClickComponent {
     if (window.innerWidth < 768) {
       var margin = {top: 20, right: 48, bottom: 30, left: 10};
     } else {
-      var margin = {top: 20, right: 60, bottom: 30, left: 40};
+      var margin = {top: 20, right: 60, bottom: 30, left: 20};
     }
 
     var width = +svg.attr("width") - margin.left - margin.right,
@@ -184,7 +184,15 @@ export class PerformanceGraphClickComponent {
       if (window.innerWidth < 768) {
         var xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b %Y")).ticks(4);
       } else {
-        var xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b %Y"));
+        // var xAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b %Y")).ticks(d3.timeMonth.every(1));
+        var xAxis = d3.axisBottom(xScale).tickFormat(function(d,i) {
+          if (i === 0 && d === 'Tue Dec 01 2015 00:00:00 GMT+0000 (Greenwich Mean Time)') {
+            return 'Inception';
+          } else {
+            const formatTime = d3.timeFormat("%b %Y"); 
+            return formatTime(d);
+          }
+        });
       }
 
       line = d3.line()
@@ -289,9 +297,15 @@ export class PerformanceGraphClickComponent {
             d = x0 - d0.date > d1.date - x0 ? d1 : d0;
         let position = d3.mouse(this)[0];
         focus.attr("transform", "translate(" + x(d.date) + "," + y(d.click) + ")");
-        focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-        + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
-        formatDate(d.date) + "</span>"; });
+        if (formatDate(d.date) === 'Dec 2015') {
+          focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+          + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
+        } else {
+          focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+          + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
+          formatDate(d.date) + "</span>"; });
+        }
+        
         focus.select(".x-hover-line").attr("y2", height - y(d.click));
         focus.select(".y-hover-line").attr("x2", width + width);
         let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();
@@ -367,9 +381,15 @@ export class PerformanceGraphClickComponent {
               d = x0 - d0.date > d1.date - x0 ? d1 : d0;
           let position = d3.mouse(this)[0];
           focus.attr("transform", "translate(" + x(d.date) + "," + y(d.click) + ")");
-          focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-          + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
-          formatDate(d.date) + "</span>"; });
+          if (formatDate(d.date) === 'Dec 2015') {
+            focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+            + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
+          } else {
+            focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+            + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
+            formatDate(d.date) + "</span>"; });
+          }
+          
           focus.select(".x-hover-line").attr("y2", height - y(d.click));
           focus.select(".y-hover-line").attr("x2", width + width);
           let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();
@@ -401,17 +421,22 @@ export class PerformanceGraphClickComponent {
       let input:any = document.getElementById("currency-field");
       input = input.value;
 
+      data.unshift({
+        date: 'Dec 2015',
+        click: 0,
+        arc: 0,
+        clickValue: input,
+        arcValue: input,
+      });
+      
       data.forEach(function(item, index) {
         if (index !== 0) {
           let previous = data[index - 1];
-          item.clickValue = (previous.clickValue*(1+(previous.click/100))).toFixed(2);
-          item.arcValue = (previous.arcValue*(1+(previous.arc/100))).toFixed(2);
-        } else {
-          item.clickValue = input;
-          item.arcValue = input;
+          item.clickValue = (previous.clickValue*(1+(item.click/100))).toFixed(2);
+          item.arcValue = (previous.arcValue*(1+(item.arc/100))).toFixed(2);
         }
       });
-
+     
       self.percentageIncrease = ((data[data.length-1].clickValue - input) / input * 100).toFixed(2);
       self.valueIncrease = (data[data.length-1].clickValue - input).toFixed(2);
 

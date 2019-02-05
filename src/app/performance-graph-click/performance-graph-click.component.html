@@ -1,4 +1,4 @@
-<h3 class="performance-title">Since inception for a <span>{{strategy.risk|lowercase}}</span> portfolio:</h3>
+<h3 class="performance-title">Since inception for our <span>{{strategy.name}}</span> investment strategy:</h3>
 <div class="calculator-wrapper">
   <div class="section">
     <div class="form-group input-group">
@@ -26,7 +26,7 @@
       <span class="click"></span>Click & Invest
     </div>
     <div class="item">
-      <span class="arc"></span>Competitor
+      <span class="arc"></span>Average peer returns
     </div>
   </div>
   <div id="chart"></div>
@@ -34,14 +34,14 @@
 </div>
 <div class="table-wrapper">
   <div class="toggle" (click)="toggleTable()">
-    <h3>Show quarterly percentage breakdown</h3>
+    <h3>See our performance broken down quarterly</h3>
     <img src="assets/imgs/chevron-down.svg" [ngClass]="{'rotate': expanded}" />
   </div>
   <table *ngIf="tableData" class="tableData" [ngClass]="{'active': expanded}">
     <tr>
       <th></th>
       <th>Click & Invest</th>
-      <th>Competitor</th>
+      <th>Average peer returns</th>
     </tr>
     <tr *ngFor="let data of tableData">
       <td class="date">{{data.date}}</td>
@@ -49,6 +49,13 @@
       <td class="arcData">{{data.arc}}%</td>
     </tr>
   </table>
+</div>
+<p class="risk-warning">The graph above shows the performance of our {{strategy.name}} investment strategy from 1 January 2016 to 31 December 2018. These figures are show together with the ARC benchmark for comparison, which shows average peer returns with equivalent risk levels. Performance is shown after fees but before any tax that may be due. The ARC figures for the last three months may represent estimates only. Past performance is not a guide to future performance, and the value of investments can fall as well as rise.
+  <a href="#" class="link">Learn more about how we calculate performance</a>
+</p>
+<div class="information info">
+  <img src="assets/imgs/info-icon.svg"/>
+  <p>Did you know, while we have a three year track record, Investec Wealth & Investment (which we’re part of) have been managing and investing money for over 180 years. If you’d like to know more about their track record, drop us an email or give us a call to find out more.</p>
 </div>
 <div class="information">
   <span>Investec Wealth & Investment (IW&I) matched portfolios</span>

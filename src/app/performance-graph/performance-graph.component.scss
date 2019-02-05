@@ -329,6 +329,31 @@ h3 {
     }
 }
 
+.risk-warning {
+    font-size: 16x;
+    font-family: 'OpenSans-Regular';
+    font-weight: 400;
+    color: #40484E;
+
+    @media (min-width: $screen-md) {
+        font-size: 18px;
+    }
+
+    a {
+        font-family: 'OpenSans-SemiBold';
+        font-weight: 600;
+        color: $primary-01;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover,
+        :focus,
+        :active {
+            color: darken( $primary-01, 10% );
+        }
+    }
+}
+
 .information {
     background-color: #F6F7F8;
     border-radius: 8px;
@@ -378,6 +403,20 @@ h3 {
 
     @media (min-width: $screen-lg) {
         margin: 30px 0;
+    }
+}
+
+.info {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+
+    p {
+        margin: 0;
+    }
+
+    img {
+        margin-right: 10px;
     }
 }
 
