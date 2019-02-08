@@ -299,10 +299,10 @@ export class PerformanceGraphClickComponent {
         focus.attr("transform", "translate(" + x(d.date) + "," + y(d.click) + ")");
         if (formatDate(d.date) === 'Dec 2015') {
           focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-          + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
+          + "</span><br><span>Peers:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
         } else {
           focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-          + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
+          + "</span><br><span>Peers:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
           formatDate(d.date) + "</span>"; });
         }
         
@@ -383,13 +383,13 @@ export class PerformanceGraphClickComponent {
           focus.attr("transform", "translate(" + x(d.date) + "," + y(d.click) + ")");
           if (formatDate(d.date) === 'Dec 2015') {
             focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-            + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
+            + "</span><br><span>Peers:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
           } else {
             focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-            + "</span><br><span>ARC:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
+            + "</span><br><span>Peers:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
             formatDate(d.date) + "</span>"; });
           }
-          
+
           focus.select(".x-hover-line").attr("y2", height - y(d.click));
           focus.select(".y-hover-line").attr("x2", width + width);
           let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();

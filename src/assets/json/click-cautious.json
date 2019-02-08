@@ -32,7 +32,7 @@
     {"date" : "Jul 2018", "click": 1.00, "arc": 0.57},
     {"date" : "Aug 2018", "click": 0.32, "arc": 0.00},
     {"date" : "Sep 2018", "click": -0.79, "arc": -0.17},
-    {"date" : "Oct 2018", "click": -2.25, "arc": -1.90},
-    {"date" : "Nov 2018", "click": 0.45, "arc": -0.50},
-    {"date" : "Dec 2018", "click": -2.54, "arc": -1.37}
+    {"date" : "Oct 2018", "click": -2.25, "arc": -1.79},
+    {"date" : "Nov 2018", "click": 0.45, "arc": -0.22},
+    {"date" : "Dec 2018", "click": -2.54, "arc": -1.54}
 ]
