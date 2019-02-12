@@ -1,4 +1,4 @@
-<h3 class="performance-title">Since inception for our <span>{{strategy.name}}</span> investment strategy:</h3>
+<h3 class="performance-title">Since inception for our <span>{{strategy.name}}</span> investment strategy, our {{strategy.risk}} approach to investing:</h3>
 <div class="calculator-wrapper">
   <div class="section">
     <div class="form-group input-group">
@@ -37,7 +37,7 @@
     <h3>See our performance broken down quarterly</h3>
     <img src="assets/imgs/chevron-down.svg" [ngClass]="{'rotate': expanded}" />
   </div>
-  <table *ngIf="tableData" class="tableData" [ngClass]="{'active': expanded}">
+  <table *ngIf="tableData" class="tableData" [ngClass]="{'expanded': expanded}">
     <tr>
       <th></th>
       <th>Click & Invest</th>
@@ -50,9 +50,8 @@
     </tr>
   </table>
 </div>
-<p class="risk-warning">Source: The graph above shows the performance of our {{strategy.name}} investment strategy from 1 January 2016 to 31 December 2018. These figures are show together with the Asset Risk Consultant
-    (ARC) benchmark for comparison, which shows average peer returns with equivalent risk levels. Performance is shown after fees but before any tax that may be due. Past performance is not a guide to future performance, and the value of investments can fall as well as rise.
-  <a href="#" class="link">Learn more about how we calculate performance</a>
+<p class="risk-warning">Source: The graph above shows the performance of our {{strategy.name | lowercase}} investment strategy from 1 January 2016 to 31 December 2018. These figures are shown together with average peer returns that have equivalent risk levels for comparison. The average peer returns benchmark is provided by the Asset Risk Consultants (ARC). Performance is shown after fees but before any tax that may be due. Past performance is not a guide to future performance, and the value of investments can fall as well as rise.
+  <a href="#" class="link" (click)="toggleModal()">Learn more about how we calculate performance</a>
 </p>
 <div class="information info">
   <img src="assets/imgs/info-icon.svg"/>
@@ -60,6 +59,33 @@
       Investment (which we’re part of) have been managing and investing money for over 180 years. If
       you’d like to know more about how Investec Wealth &amp; Investment have managed portfolios similar to
       those of Click &amp; Invest in the past, drop us an email or give us a call to find out more.</p>
+</div>
+<div class="modal" *ngIf="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>How performance is calculated</h2>
+      <span class="close" (click)="toggleModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <h4>Our Returns</h4>
+      <p>The returns shown here are calculated based on actual Investec Click &amp; Invest portfolio returns from
+          five seeded portfolios set up on 1 January 2016, and are based on an initial account size of £10,000.
+          Performance is shown after fees but before any tax that may be due.</p>
+      <h4>Average Peer Returns</h4>    
+      <p>This data is based on monthly results published by Asset Risk Consultants (ARC). ARC is a peer
+          group benchmark which shows the average returns from discretionary investment managers based
+          on risk profile, after fees.</p>
+      <p>For the purposes of accurate comparison, we have matched our five strategies to the following ARC
+          classifications:</p>    
+      <ul>
+        <li><span>Click & Invest Defensive</span> = Sterling Cautious</li>
+        <li><span>Click & Invest Cautious</span> = Sterling Cautious</li>
+        <li><span>Click & Invest Measured</span> = Sterling Balanced</li>
+        <li><span>Click & Invest Adventurous</span> = Sterling Steady Growth</li>
+        <li><span>Click & Invest Aggressive</span> = Sterling Equity Risk</li>
+      </ul>    
+    </div>
+  </div>
 </div>
 <!-- <div class="information">
   <span>Investec Wealth & Investment (IW&I) matched portfolios</span>

@@ -15,6 +15,7 @@ export class PerformanceGraphClickComponent {
   percentageIncrease: any;
   intialInvestment: any;
   expanded: boolean = false;
+  modal: boolean = false;
 
   constructor(private http: HttpClient) { }
   @HostListener('window:resize')
@@ -43,6 +44,10 @@ export class PerformanceGraphClickComponent {
 
   toggleTable() {
     this.expanded = !this.expanded;
+  }
+
+  toggleModal() {
+    this.modal = !this.modal;
   }
 
   switchData() {

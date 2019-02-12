@@ -19,6 +19,11 @@
     src: url('/assets/fonts/OpenSans-Bold.ttf') format("truetype");
 }
 
+@font-face {
+    font-family: 'ClickFont-Regular';
+    src: url('/assets/fonts/ClickFont-Regular.ttf') format("truetype");
+}
+
 //Media queries breakpoints
 $screen-xs: 480px;
 $screen-sm: 768px;
@@ -57,7 +62,7 @@ $background-02: $grey-05;
 }
 
 %subtitle {
-    font-family: 'OpenSans-Regular';
+    font-family: 'ClickFont-Regular';
     font-weight: 400;
     color: $secondary;
     font-size: 26px;

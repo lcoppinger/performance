@@ -250,7 +250,7 @@ h3 {
         display: block;
     }
 
-    &.active {
+    &.expanded {
         max-height: 5000px;
         transition: max-height 0.25s ease-in;
     }
@@ -452,7 +452,7 @@ h3 {
         margin: 0 10px;
     }
 
-    &.active {
+    &.selected {
         background-color: #ffffff;
         border-bottom: 2px solid #ffffff;
         outline: none;
@@ -476,6 +476,12 @@ h3 {
             background: #ffffff;
             box-shadow: 7px 6px 8px 0 rgba(0, 0, 0, 0.1);
             transform: translate(-50%, 50%) rotate(45deg);
+        }
+
+        @media (min-width: $screen-sm) {
+            height: 62px;
+            margin-bottom: -2px;
+            border-bottom: 1px solid #ffffff;
         }
 
         @media (min-width: $screen-md) {
@@ -533,7 +539,7 @@ h3 {
         display: block
     }
 
-    &.active {
+    &.selected {
         visibility: visible;
     }
 }
@@ -542,7 +548,7 @@ h3 {
     display: none;
     z-index: 1;
 
-    &.active {
+    &.selected {
         display: block;
         margin-top: 16px;
 
@@ -569,12 +575,13 @@ h3 {
         border-color: darken(#FFE7D4, 10%);
     }
 
-    &.active {
+    &.selected {
         color: #ff9e55;
         border-color: #ffffff;
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
+            border-bottom: 1px solid #ffffff;
         }
     }
 }
@@ -591,12 +598,13 @@ h3 {
         border-color: darken(#FEC499, 10%);
     }
 
-    &.active {
+    &.selected {
         color: #ff9e55;
         border-color: #ffffff;
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
+            border-bottom: 1px solid #ffffff;
         }
     }
 }
@@ -613,12 +621,13 @@ h3 {
         border-color: darken(#FF9E55, 10%);
     }
 
-    &.active {
+    &.selected {
         color: #ff9e55;
         border-color: #ffffff;
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
+            border-bottom: 1px solid #ffffff;
         }
     }
 }
@@ -635,12 +644,13 @@ h3 {
         border-color: darken(#F48532, 10%);
     }
 
-    &.active {
+    &.selected {
         color: #ff9e55;
         border-color: #ffffff;
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
+            border-bottom: 1px solid #ffffff;
         }
     }
 }
@@ -657,12 +667,13 @@ h3 {
         border-color: darken(#E66F16, 10%);
     }
 
-    &.active {
+    &.selected {
         color: #ff9e55;
         border-color: #ffffff;
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
+            border-bottom: 1px solid #ffffff;
         }
     }
 }

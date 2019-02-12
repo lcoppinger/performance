@@ -10,9 +10,9 @@ declare var d3: any;
 })
 export class PerformanceGraphComponent implements OnInit {
   data: string = "Click";
-  active: string = "Measured";
-  strategy: any = {name:'Measured', risk:'Medium risk'};
-  strategies: any[] = [{name:'Defensive', risk:'Low risk'}, {name:'Cautious', risk:'Low/Medium risk'}, {name:'Measured', risk:'Medium risk'}, {name:'Adventurous', risk:'Medium/High risk'}, {name:'Aggressive', risk:'High risk'}]; 
+  selected: string = "Measured";
+  strategy: any = {name:'Measured', risk:'medium risk'};
+  strategies: any[] = [{name:'Defensive', risk:'lowest risk'}, {name:'Cautious', risk:'second lowest risk'}, {name:'Measured', risk:'medium risk'}, {name:'Adventurous', risk:'second highest risk'}, {name:'Aggressive', risk:'highest risk'}]; 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
@@ -29,14 +29,14 @@ export class PerformanceGraphComponent implements OnInit {
   }
 
   changeStrategy(strategy) {
-    if (strategy.name !== this.active) {
-      this.active = strategy.name;
+    if (strategy.name !== this.selected) {
+      this.selected = strategy.name;
       this.strategy = strategy;
     }
   }
 
   getImage(strategy) {
     const name = strategy.name.toLowerCase();
-    return strategy.name===this.active ? "assets/imgs/"+name+"-tab-active.svg" : "assets/imgs/"+name+"-tab-icon.svg";
+    return strategy.name===this.selected ? "assets/imgs/"+name+"-tab-active.svg" : "assets/imgs/"+name+"-tab-icon.svg";
   }
 }
