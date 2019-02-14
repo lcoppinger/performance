@@ -145,6 +145,22 @@
     }
 }
 
+.invalid {
+    @extend %body-copy;
+    font-size: 14px;
+    color: rgb(214, 35, 36);
+}
+
+.form-group input.error {
+    border-color: rgb(214, 35, 36);
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: rgb(214, 35, 36);
+    }
+}
+
 .modal {
     background-color: rgba(0,0,0,0.4);
     z-index: 1;

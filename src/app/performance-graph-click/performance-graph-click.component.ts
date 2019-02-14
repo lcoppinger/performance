@@ -16,6 +16,7 @@ export class PerformanceGraphClickComponent {
   intialInvestment: any;
   expanded: boolean = false;
   modal: boolean = false;
+  error: boolean = false;
 
   constructor(private http: HttpClient) { }
   @HostListener('window:resize')
@@ -212,7 +213,15 @@ export class PerformanceGraphClickComponent {
       g.append("g")
       .attr("class", "axis axis--y")
       .attr("transform", "translate( " + width + ", 0 )")
-      .call(d3.axisRight(y).ticks(5).tickFormat(function(d) { return "£" + d/1000 + "k"; }))
+      .call(d3.axisRight(y).ticks(5).tickFormat(function(d) { 
+        if (d > 999 && d < 999999) {
+          return "£" + d/1000 + "k"; 
+        } else if (d > 999999) {
+          return "£" + d/1000000 + "m"; 
+        } else {
+          return "£" + d;
+        }
+      }))
       .append("text")
       .attr("class", "axis-title")
       .attr("transform", "rotate(-90)")
@@ -303,11 +312,11 @@ export class PerformanceGraphClickComponent {
         let position = d3.mouse(this)[0];
         focus.attr("transform", "translate(" + x(d.date) + "," + y(d.click) + ")");
         if (formatDate(d.date) === 'Dec 2015') {
-          focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-          + "</span><br><span>Peers:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
+          focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+          + "</span><br><span>Peers:&nbsp;£" + d.arc.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
         } else {
-          focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-          + "</span><br><span>Peers:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
+          focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+          + "</span><br><span>Peers:&nbsp;£" + d.arc.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
           formatDate(d.date) + "</span>"; });
         }
         
@@ -340,72 +349,85 @@ export class PerformanceGraphClickComponent {
     });
 
     function refresh() {
-      d3.json("assets/json/click-"+self.strategy.name.toLowerCase()+".json", function(error, data) {
-        calculateData(data);
-        const every_nth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
+      if (self.intialInvestment >= 2500) {
+        self.error = false;
+        d3.json("assets/json/click-"+self.strategy.name.toLowerCase()+".json", function(error, data) {
+          calculateData(data);
+          const every_nth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
 
-        if (window.innerWidth < 768) {
-          data = every_nth(data, 4);
-        }
-
-        data.forEach(function(d) {
-          d.date = parseTime(d.date);
-          d.click = +d.clickValue;
-          d.arc = +d.arcValue;
-        });
-
-        // Scale the range of the data again 
-        x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain([d3.min(data, function(d) { return Math.min(d.arc, d.click); }) / 1.005, d3.max(data, function(d) { return Math.max(d.arc, d.click); }) * 1.005]);
-
-        d3.select(".area")
-          .data([data])
-          .attr("d", initialarea) // initial state (line at the bottom)
-          .transition().duration(1500)
-          .attr("d", area);
-
-        d3.select(".lineArc")
-          .call(dashedTransition);
-        
-        d3.select(".line")
-          .call(transition);
-
-        d3.select(".axis--y") // change the x axis
-        .transition()
-        .duration(750)
-        .call(d3.axisRight(y).ticks(5).tickFormat(function(d) { return "£" + d/1000 + "k"; }));
-
-        d3.select(".overlay")
-        .on("mousemove", mousemove);
-
-        function mousemove() {
-          var x0 = x.invert(d3.mouse(this)[0]),
-              i = bisectDate(data, x0, 1),
-              d0 = data[i - 1],
-              d1 = data[i],
-              d = x0 - d0.date > d1.date - x0 ? d1 : d0;
-          let position = d3.mouse(this)[0];
-          focus.attr("transform", "translate(" + x(d.date) + "," + y(d.click) + ")");
-          if (formatDate(d.date) === 'Dec 2015') {
-            focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-            + "</span><br><span>Peers:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
-          } else {
-            focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
-            + "</span><br><span>Peers:&nbsp;£" + d.arc.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
-            formatDate(d.date) + "</span>"; });
+          if (window.innerWidth < 768) {
+            data = every_nth(data, 4);
           }
 
-          focus.select(".x-hover-line").attr("y2", height - y(d.click));
-          focus.select(".y-hover-line").attr("x2", width + width);
-          let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();
-          focus.select("foreignObject").attr("x", function() {
-            return position > (width/2) ? -(boxWidth.width + 15) : 15;
+          data.forEach(function(d) {
+            d.date = parseTime(d.date);
+            d.click = +d.clickValue;
+            d.arc = +d.arcValue;
           });
-          focus.select("foreignObject").attr("y", function() {
-            return position > (height/2) ? 15 : -(boxWidth.height + 15);
-          });
-        }
-      });
+
+          // Scale the range of the data again 
+          x.domain(d3.extent(data, function(d) { return d.date; }));
+          y.domain([d3.min(data, function(d) { return Math.min(d.arc, d.click); }) / 1.005, d3.max(data, function(d) { return Math.max(d.arc, d.click); }) * 1.005]);
+
+          d3.select(".area")
+            .data([data])
+            .attr("d", initialarea) // initial state (line at the bottom)
+            .transition().duration(1500)
+            .attr("d", area);
+
+          d3.select(".lineArc")
+            .call(dashedTransition);
+          
+          d3.select(".line")
+            .call(transition);
+
+          d3.select(".axis--y") // change the x axis
+          .transition()
+          .duration(750)
+          .call(d3.axisRight(y).ticks(5).tickFormat(function(d) { 
+            if (d > 999 && d < 999999) {
+              return "£" + d/1000 + "k"; 
+            } else if (d > 999999) {
+              return "£" + d/1000000 + "m"; 
+            } else {
+              return "£" + d;
+            }
+          }));
+
+          d3.select(".overlay")
+          .on("mousemove", mousemove);
+
+          function mousemove() {
+            var x0 = x.invert(d3.mouse(this)[0]),
+                i = bisectDate(data, x0, 1),
+                d0 = data[i - 1],
+                d1 = data[i],
+                d = x0 - d0.date > d1.date - x0 ? d1 : d0;
+            let position = d3.mouse(this)[0];
+            focus.attr("transform", "translate(" + x(d.date) + "," + y(d.click) + ")");
+            if (formatDate(d.date) === 'Dec 2015') {
+              focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+              + "</span><br><span>Peers:&nbsp;£" + d.arc.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Inception</span>"; });
+            } else {
+              focus.select(".tooltip-inner").html(function() { return "<span>Click&nbsp;&&nbsp;Invest:&nbsp;£" + d.click.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",") 
+              + "</span><br><span>Peers:&nbsp;£" + d.arc.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</span><br><span class='date'>Date:&nbsp;" +
+              formatDate(d.date) + "</span>"; });
+            }
+
+            focus.select(".x-hover-line").attr("y2", height - y(d.click));
+            focus.select(".y-hover-line").attr("x2", width + width);
+            let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();
+            focus.select("foreignObject").attr("x", function() {
+              return position > (width/2) ? -(boxWidth.width + 15) : 15;
+            });
+            focus.select("foreignObject").attr("y", function() {
+              return position > (height/2) ? 15 : -(boxWidth.height + 15);
+            });
+          }
+        });
+      } else {
+        self.error = true;
+      }
     }
 
     function formatDate(date) {
@@ -444,7 +466,7 @@ export class PerformanceGraphClickComponent {
      
       self.percentageIncrease = ((data[data.length-1].clickValue - input) / input * 100).toFixed(2);
       self.valueIncrease = (data[data.length-1].clickValue - input).toFixed(2);
-
+      self.valueIncrease = self.valueIncrease.toLocaleString('en', {minimumFractionDigits: 2}).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   }
 }
