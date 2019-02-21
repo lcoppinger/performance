@@ -276,11 +276,6 @@ export class PerformanceGraphClickComponent {
         .attr("y1", 0)
         .attr("y2", height);
 
-      focus.append("line")
-      .attr("class", "y-hover-line hover-line")
-      .attr("x1", width)
-      .attr("x2", width);
-
       focus.append("circle")
           .attr("r", 7.5);
 
@@ -288,6 +283,8 @@ export class PerformanceGraphClickComponent {
           .attr("x", 15)
           .attr("dy", ".31em")
           .attr("class", "tooltip")
+          .attr("width", 250)
+          .attr("height", 100)
           .append('xhtml:div')
           .append('div')
           .attr("class", "tooltip-inner");
@@ -319,7 +316,6 @@ export class PerformanceGraphClickComponent {
         }
         
         focus.select(".x-hover-line").attr("y2", height - y(d.click));
-        focus.select(".y-hover-line").attr("x2", width + width);
         let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();
         focus.select("foreignObject").attr("x", function() {
           return position > (width/2) ? -(boxWidth.width + 15) : 15;
@@ -413,7 +409,6 @@ export class PerformanceGraphClickComponent {
             }
 
             focus.select(".x-hover-line").attr("y2", height - y(d.click));
-            focus.select(".y-hover-line").attr("x2", width + width);
             let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();
             focus.select("foreignObject").attr("x", function() {
               return position > (width/2) ? -(boxWidth.width + 15) : 15;
