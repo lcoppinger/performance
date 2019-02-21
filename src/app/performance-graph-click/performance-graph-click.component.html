@@ -46,8 +46,8 @@
     </tr>
     <tr *ngFor="let data of tableData">
       <td class="date">{{data.date}}</td>
-      <td class="clickData">{{data.click}}%</td>
-      <td class="arcData">{{data.arc}}%</td>
+      <td class="clickData">{{data.click.toLocaleString('en', {minimumFractionDigits: 2})}}%</td>
+      <td class="arcData">{{data.arc.toLocaleString('en', {minimumFractionDigits: 2})}}%</td>
     </tr>
   </table>
 </div>

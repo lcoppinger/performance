@@ -36,10 +36,8 @@ export class PerformanceGraphClickComponent {
   }
 
   makeTable() {
-    this.http.get("assets/json/click-"+this.strategy.name.toLowerCase()+".json").subscribe((data: any) => {
-      this.tableData = data.filter((value, index, Arr) => {
-        return index % 3 == 0;
-      });
+    this.http.get("assets/json/click-"+this.strategy.name.toLowerCase()+"-quarterly.json").subscribe((data: any) => {
+      this.tableData = data;
     });
   }
 
