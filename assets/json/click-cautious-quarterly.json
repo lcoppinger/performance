@@ -1,0 +1,14 @@
+[
+    {"date" : "Jan – Mar 2016", "click": 0.00, "arc": 0.19},
+    {"date" : "Apr – Jun 2016", "click": 2.44, "arc": 1.33},
+    {"date" : "Jul – Sep 2016", "click": 5.56, "arc": 3.10},
+    {"date" : "Oct – Dec 2016", "click": 1.73, "arc": 0.81},
+    {"date" : "Jan – Mar 2017", "click": 2.56, "arc": 1.70},
+    {"date" : "Apr – Jun 2017", "click": 1.18, "arc": 0.78},
+    {"date" : "Jul – Sep 2017", "click": 0.68, "arc": 0.52},
+    {"date" : "Oct – Dec 2017", "click": 2.18, "arc": 1.41},
+    {"date" : "Jan – Mar 2018", "click": -3.19, "arc": -2.03},
+    {"date" : "Apr – Jun 2018", "click": 3.63, "arc": 1.55},
+    {"date" : "Jul – Sep 2018", "click": 0.52, "arc": 0.39},
+    {"date" : "Oct – Dec 2018", "click": -4.30, "arc": -3.52}
+]
