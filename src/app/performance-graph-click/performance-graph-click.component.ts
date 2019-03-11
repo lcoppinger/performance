@@ -16,7 +16,7 @@ export class PerformanceGraphClickComponent {
   intialInvestment: any;
   expanded: boolean = false;
   modal: boolean = false;
-  error: boolean = false;
+  error: string = null;
 
   constructor(private http: HttpClient) { }
   @HostListener('window:resize')
@@ -62,7 +62,8 @@ export class PerformanceGraphClickComponent {
     var svg = d3.select(chartDiv).append("svg")
     .attr('width', svgWidth)
     .attr('height', svgHeight)
-    .attr('id', 'Click');
+    .attr('id', 'Click')
+    .attr('class', 'graph-svg');
 
     if (window.innerWidth < 768) {
       var margin = {top: 20, right: 48, bottom: 30, left: 10};
@@ -318,10 +319,10 @@ export class PerformanceGraphClickComponent {
         focus.select(".x-hover-line").attr("y2", height - y(d.click));
         let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();
         focus.select("foreignObject").attr("x", function() {
-          return position > (width/2) ? -(boxWidth.width + 15) : 15;
+          return position > (width/1.75) ? -(boxWidth.width + 10) : 10;
         });
         focus.select("foreignObject").attr("y", function() {
-          return position > (height/2) ? 15 : -(boxWidth.height + 15);
+          return position > (height/1.75) ? 10 : -(boxWidth.height + 10);
         });
       }
 
@@ -343,8 +344,8 @@ export class PerformanceGraphClickComponent {
     });
 
     function refresh() {
-      if (self.intialInvestment >= 2500) {
-        self.error = false;
+      if (self.intialInvestment >= 2500 && self.intialInvestment <= 10000000) {
+        self.error = null;
         d3.json("assets/json/click-"+self.strategy.name.toLowerCase()+".json", function(error, data) {
           calculateData(data);
           const every_nth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1);
@@ -411,15 +412,17 @@ export class PerformanceGraphClickComponent {
             focus.select(".x-hover-line").attr("y2", height - y(d.click));
             let boxWidth = focus.select(".tooltip-inner").node().getBoundingClientRect();
             focus.select("foreignObject").attr("x", function() {
-              return position > (width/2) ? -(boxWidth.width + 15) : 15;
+              return position > (width/2) ? -(boxWidth.width + 10) : 10;
             });
             focus.select("foreignObject").attr("y", function() {
-              return position > (height/2) ? 15 : -(boxWidth.height + 15);
+              return position > (height/2) ? 10 : -(boxWidth.height + 10);
             });
           }
         });
-      } else {
-        self.error = true;
+      } else if (self.intialInvestment < 2500) {
+        self.error = "Our minimum investment is £2,500";
+      } else if (self.intialInvestment > 10000000) {
+        self.error = "Input cannot exceed £10m";
       }
     }
 

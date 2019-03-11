@@ -92,11 +92,15 @@
 
 /deep/.tooltip-inner {
     background-color: #F6F7F8;
-    padding: 10px 14px;
+    padding: 10px;
     border-radius: 4px;
     border: 1px solid #DDE2E5;
     display: inline-block;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.16);
+
+    @media (min-width: $screen-sm) {
+        padding: 10px 14px;
+    }
 }
 
 /deep/.tooltip-inner span {
@@ -128,6 +132,10 @@
     cursor: move;
     fill: none;
     pointer-events: all;
+}
+
+/deep/.graph-svg {
+    overflow: visible;
 }
 
 .risk {

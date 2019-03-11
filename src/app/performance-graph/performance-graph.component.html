@@ -3,7 +3,7 @@
     <button type="button" class="tab" [ngClass]="strategy.name" [class.selected]="selected==strategy.name" *ngFor="let strategy of strategies"
     (click)="changeStrategy(strategy)">
       <div class="tab-content">
-      <img [src]="getImage(strategy)" />
+      <img class="strategy-icon" [src]="getImage(strategy)" />
       <span class="name" [class.selected]="selected==strategy.name">{{ strategy.name }}</span>
       </div>
       <!-- <span class="risk" [class.selected]="selected==strategy.name">{{ strategy.risk }}</span> -->

@@ -64,7 +64,7 @@ h3 {
     align-items: center;
 
     &:first-child {
-        margin-right: 30px;
+        margin-right: 16px;
 
         @media (min-width: $screen-md) {
             margin-right: 60px;
@@ -87,8 +87,7 @@ h3 {
 }
 
 .section {
-    padding: 0 15px;
-    width: calc(50% - 25px);
+    width: 50%;
     border-right: 2px solid #DDE2E5;
     text-align: center;
 
@@ -100,6 +99,7 @@ h3 {
     }
 
     &:last-child {
+        width: calc(50% - 25px);
         border: none;
         padding: 0;
     }
@@ -417,6 +417,7 @@ h3 {
 
     img {
         margin-right: 10px;
+        height: 25px;
     }
 }
 
@@ -519,6 +520,14 @@ h3 {
     @media (min-width: $screen-md) {
         flex-direction: row;
         margin-top: 0;
+    }
+}
+
+.strategy-icon {
+    height: 26px;
+
+    @media (min-width: $screen-md) {
+        height: auto;
     }
 }
 
