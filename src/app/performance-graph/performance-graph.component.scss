@@ -472,8 +472,8 @@ h3 {
             position: absolute;
             left: 50%;
             bottom: 0;
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background: #ffffff;
             box-shadow: 7px 6px 8px 0 rgba(0, 0, 0, 0.1);
             transform: translate(-50%, 50%) rotate(45deg);
@@ -524,10 +524,10 @@ h3 {
 }
 
 .strategy-icon {
-    height: 26px;
+    display: none;
 
-    @media (min-width: $screen-md) {
-        height: auto;
+    @media (min-width: $screen-sm) {
+       display: inline-block;
     }
 }
 
@@ -559,7 +559,7 @@ h3 {
 
     &.selected {
         display: block;
-        margin-top: 16px;
+        margin-top: 46px;
 
         @media (min-width: $screen-sm) {
             margin-top: 0;
@@ -573,7 +573,7 @@ h3 {
 }
 
 .Defensive {
-    background-color: #FFE7D4;
+    background: url('../../assets/imgs/defensive-tab-icon.svg') #FFE7D4 no-repeat center;
     border: 2px solid #FFE7D4;
     color: #40484E;
 
@@ -584,9 +584,19 @@ h3 {
         border-color: darken(#FFE7D4, 10%);
     }
 
+    @media (min-width: $screen-sm) { 
+        background-image: none;
+    }
+
     &.selected {
+        background: url('../../assets/imgs/defensive-tab-active.svg') #ffffff no-repeat center;
         color: #ff9e55;
         border-color: #ffffff;
+
+        @media (min-width: $screen-sm) { 
+            background-image: none;
+        }
+    
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
@@ -596,7 +606,7 @@ h3 {
 }
 
 .Cautious {
-    background-color: #FEC499;
+    background: url('../../assets/imgs/cautious-tab-icon.svg') #FEC499 no-repeat center;
     border: 2px solid #FEC499;
     color: #40484E;
 
@@ -607,9 +617,18 @@ h3 {
         border-color: darken(#FEC499, 10%);
     }
 
+    @media (min-width: $screen-sm) { 
+        background-image: none;
+    }
+
     &.selected {
+        background: url('../../assets/imgs/cautious-tab-active.svg') #ffffff no-repeat center;
         color: #ff9e55;
         border-color: #ffffff;
+
+        @media (min-width: $screen-sm) { 
+            background-image: none;
+        }
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
@@ -619,7 +638,7 @@ h3 {
 }
 
 .Measured {
-    background-color: #FF9E55;
+    background: url('../../assets/imgs/measured-tab-icon.svg') #FF9E55 no-repeat center;
     border: 2px solid #FF9E55;
     color: #ffffff;
 
@@ -630,9 +649,18 @@ h3 {
         border-color: darken(#FF9E55, 10%);
     }
 
+    @media (min-width: $screen-sm) { 
+        background-image: none;
+    }
+
     &.selected {
+        background: url('../../assets/imgs/measured-tab-active.svg') #ffffff no-repeat center;
         color: #ff9e55;
         border-color: #ffffff;
+
+        @media (min-width: $screen-sm) { 
+            background-image: none;
+        }
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
@@ -642,7 +670,7 @@ h3 {
 }
 
 .Adventurous {
-    background-color: #F48532;
+    background: url('../../assets/imgs/adventurous-tab-icon.svg') #F48532 no-repeat center;
     border: 2px solid #F48532;
     color: #ffffff;
 
@@ -653,9 +681,18 @@ h3 {
         border-color: darken(#F48532, 10%);
     }
 
+    @media (min-width: $screen-sm) { 
+        background-image: none;
+    }
+
     &.selected {
+        background: url('../../assets/imgs/adventurous-tab-active.svg') #ffffff no-repeat center;
         color: #ff9e55;
         border-color: #ffffff;
+
+        @media (min-width: $screen-sm) { 
+            background-image: none;
+        }
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
@@ -665,7 +702,7 @@ h3 {
 }
 
 .Aggressive {
-    background-color: #E66F16;
+    background: url('../../assets/imgs/aggressive-tab-icon.svg') #E66F16 no-repeat center;
     border: 2px solid #E66F16;
     color: #ffffff;
 
@@ -676,9 +713,18 @@ h3 {
         border-color: darken(#E66F16, 10%);
     }
 
+    @media (min-width: $screen-sm) { 
+        background-image: none;
+    }
+
     &.selected {
+        background: url('../../assets/imgs/aggressive-tab-active.svg') #ffffff no-repeat center;
         color: #ff9e55;
         border-color: #ffffff;
+
+        @media (min-width: $screen-sm) { 
+            background-image: none;
+        }
 
         @media (min-width: $screen-md) {
             border-color: #FF9E55;
