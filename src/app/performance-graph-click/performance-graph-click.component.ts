@@ -25,12 +25,14 @@ export class PerformanceGraphClickComponent {
     svg.remove();
     this.drawGraph();
   }
+  ngOnInit() {
+    this.intialInvestment = 10000;
+  }
 
   ngOnChanges() {
     if (d3.select('#chart svg')) {
       d3.select('#chart svg').remove();
     }
-    this.intialInvestment = 10000;
     this.drawGraph();
     this.makeTable();
   }
